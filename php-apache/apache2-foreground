@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+chown www-data:www-data /app -R
+source /etc/apache2/envvars
+exec /usr/sbin/apache2 -DFOREGROUND
