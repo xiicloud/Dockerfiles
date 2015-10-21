@@ -14,9 +14,9 @@ RUN apt-get update && \
 
 workdir /app
 
-add php-fpm.conf /etc/php/php-fpm.conf
+add php-fpm.conf /etc/php5/fpm/php-fpm.conf
 add docker-php-ext-install /usr/local/bin/
 
 expose 80 443 9000
 
-cmd ["php-fpm"]
+cmd ["php5-fpm"]
