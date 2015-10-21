@@ -12,6 +12,7 @@ RUN apt-get update  &&  \
     apt-get autoremove -y && \
     apt-get clean && \
     rm -fr  /var/lib/apt/lists &&  \
+    rm -fr  /app/index.html    &&  \
     tar -xzf /tmp/wordpress.tar.gz -C /app/ --strip-components=1  && \
     rm /tmp/wordpress.tar.gz  && \
     chown -R www-data:www-data /app
