@@ -1,4 +1,4 @@
-FROM  csphere-debian
+FROM  nicescale/debian
 maintainer  yj <yujian@nicescale.com>
 
 LABEL service=php

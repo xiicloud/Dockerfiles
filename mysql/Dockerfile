@@ -1,4 +1,4 @@
-from  csphere-debian 
+from  nicescale/debian 
 
 maintainer yj <yujian@nicescale.com>
 
