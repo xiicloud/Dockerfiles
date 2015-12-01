@@ -1,0 +1,34 @@
+#!/bin/bash
+set -e
+
+apt-get update
+
+usage() {
+	echo "usage: $0 ext-name [ext-name ...]"
+	echo "   ie: $0 gd mysqli"
+	echo "       $0 pdo pdo_mysql"
+	echo
+	echo 'Possible values for ext-name:'
+	echo $(apt-cache -n  search  "^php5?-.*"|cut -f2 -d-|grep -Evw "apache2|common|php|phpdbg"|sort|uniq)
+}
+
+exts=()
+while [ $# -gt 0 ]; do
+	ext="$1"
+	shift
+	if [ -z "$ext" ]; then
+		continue
+	fi
+	exts+=( "$ext" )
+done
+
+if [ "${#exts[@]}" -eq 0 ]; then
+	usage >&2
+	exit 1
+fi
+
+for ext in "${exts[@]}"; do
+	(
+		apt-get install -y php-$ext
+	)
+done
