@@ -18,4 +18,4 @@ run sed  -i 's/Port[[:space:]]*22/#&/' /etc/ssh/sshd_config
 run echo "UsePAM no" >> /etc/ssh/sshd_config
 run echo "Port 2122" >> /etc/ssh/sshd_config
 
-cmd  service ssh start  &&  while true;do  sleep 1000; done
+cmd  ["/usr/sbin/sshd",  "-D"]

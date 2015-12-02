@@ -1,7 +1,14 @@
 #Cloudera Manager Server & CDH 5.5.0 Docker image
 
+### 硬件要求
 
-# 镜像构建
+CDH and Cloudera Manager Version |  RAM Required by Machine 
+---------------------------------|--------------------------
+CDH 5(default)                   |  4+ GiB
+Cloudera Express                 |  8+ GiB 
+Cloudera Enterprise(trial)       |  10+ GiB
+
+### 镜像构建
 
 ```
 cd  cm-cdh-base
@@ -14,15 +21,17 @@ cd  cdh
 docker build  -t  cdh  .
 ```
 
-# 启动容器
+### 启动容器
 
 使用csphere 自带应用模板功能, 创建一个应用模板, 比如叫做test , 在此模板添加两个服务分别为cm,cdh.
+
 cm 服务启动容器参数, 使用服务名cm 做 主机名
+
 cdh服务启动容器参数,创建一个环境变量: CM_HOST=cm, 指向cloudera manager server 容器的主机名;  使用privilege 模式启动
 
 待相关进程启动后, 可以访问cm 服务的7180 端口, 进入cloudera 管理器面板.
 
-## 首次配置
+### 首次配置
 
 使用默认用户名,密码: admin,admin 登陆管理控制台, 一路点击continue, 直到出现
 Specify hosts for your CDH cluster installation, 在Currently Managed Hosts  标签页面,  勾选连接上来的主机.
@@ -33,3 +42,6 @@ Database Setup,  选 Use Embeded Database ,  点击 Test Connection
 
 当出现, Review Changes, 默认为 DataNode Default Group, NameNode Default Group, SecondaryNameNode Default Group, NodeManager Default Group 生成的路径前缀 /etc/hostname, /etc/hosts, /etc/resolv.conf, 都是已经存在的文件, 替换成不存在的路径, 比如替换etc 为 data. 然后点击continue, 开始配置启动服务.
 
+### 节点添加
+
+在控制面板上观察到新连接上来的主机后, 选中主机, 下拉菜单选择 Apply Host Template , 没有模板就新建一个(过程同 Review Changes),  然后点击 Start Roles on Hosts .
